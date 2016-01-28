@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      function sendFunction() {
+        socket.emit('new message', 'apa kabar');
+      }
+      socket.on('chat message', function(msg){
+        console.log(msg);
+      });
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
