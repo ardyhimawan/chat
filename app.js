@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var socket = require('./routes/socket');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -24,7 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/socket', socket.router);
 app.use('/', routes);
 app.use('/users', users);
 
@@ -58,6 +56,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-socket.sck(app.io);
+
+require('./routes/socket')(app.io);
 
 module.exports = app;
